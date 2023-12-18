@@ -1,0 +1,7 @@
+/* Ajoutez ces styles à votre fichier CSS */
+.circular-image {
+    border-radius: 50%;
+    width: 50px; /* Ajustez la largeur selon vos besoins */
+    height: 50px; /* Ajustez la hauteur selon vos besoins */
+    object-fit: cover; /* Assurez-vous que l'image couvre complètement le cercle */
+}

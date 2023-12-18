@@ -1,0 +1,106 @@
+/* Styles pour l'élément de pied de page #footer */
+#footer {
+    background-color: var(--black-color); /* Couleur de fond du pied de page */
+    @include padding-y(3rem, 2rem); /* Ajout de marges intérieures verticales et horizontales */
+
+    /* Styles pour l'élément avec la classe .separator à l'intérieur de #footer */
+    .separator {
+        @include margin-y(2.5rem, 2rem); /* Ajout de marges verticales et horizontales */
+        opacity: 0.7; /* Opacité de l'élément */
+    }
+}
+
+/* Styles pour l'élément .footer_wrapper */
+.footer_wrapper {
+    grid-template-columns: 1.4fr ; /* Disposition en grille avec une colonne large et trois colonnes égales */
+    justify-items: center; /* Centre les éléments horizontalement */
+    gap: 2rem; /* Espacement entre les éléments */
+
+    /* Styles spécifiques pour les dispositifs de taille moyenne */
+    @include devices(md) {
+        grid-template-columns: 1.4fr 1fr; /* Deux colonnes, une large et une égale */
+        justify-items: unset; /* Réinitialise la justification des éléments */
+        gap: 4rem; /* Espacement plus grand entre les éléments */
+    }
+
+    /* Styles spécifiques pour les dispositifs de petite taille */
+    @include devices(xs) {
+        grid-template-columns: 1fr; /* Une seule colonne pour les petits écrans */
+        gap: 3rem; /* Espacement plus grand entre les éléments */
+    }
+}
+
+/* Styles pour l'élément .foot_subs */
+.foot_subs {
+    /* Styles pour les paragraphes à l'intérieur de .foot_subs */
+    p {
+        @include margin-y(1rem, 1rem); /* Ajout de marges verticales */
+        font-size: 0.875rem; /* Taille de police */
+        opacity: 0.9; /* Opacité du texte */
+    }
+
+    /* Styles pour les boutons avec la classe .btn à l'intérieur de .foot_subs */
+    .btn {
+        margin-top: 1rem; /* Marge supérieure pour les boutons */
+    }
+}
+
+/* Styles pour l'élément .foot_menu */
+.foot_menu {
+    /* Styles pour les listes à puces à l'intérieur de .foot_menu */
+    ul {
+        margin-top: 1.8rem; /* Marge supérieure pour la liste à puces */
+        display: grid; /* Affichage en grille */
+        gap: 1rem; /* Espacement entre les éléments de la grille */
+
+        /* Styles pour les liens (ancre) à l'intérieur de .foot_menu */
+        a {
+            font-size: 0.9rem; /* Taille de police des liens */
+            opacity: 0.8; /* Opacité des liens */
+
+            /* Styles au survol des liens */
+            &:hover {
+                opacity: 1; /* Opacité maximale au survol */
+            }
+        }
+    }
+}
+
+/* Styles pour l'élément .sub_footer_wrapper */
+.sub_footer_wrapper {
+    @include flexbox(space-between, center); /* Affichage en boîte flexible avec un espacement entre les éléments et centrage vertical */
+
+    /* Styles spécifiques pour les dispositifs de taille moyenne */
+    @include devices(md) {
+        @include flexbox(); /* Réinitialise l'affichage en boîte flexible */
+        flex-direction: column-reverse; /* Colonne inversée pour les dispositifs de taille moyenne */
+        gap: 2rem; /* Espacement entre les éléments */
+    }
+}
+
+/* Styles pour l'élément .foot_copyright */
+.foot_copyright {
+    font-size: 0.95rem; /* Taille de police */
+    
+    /* Styles pour les liens (ancre) à l'intérieur de .foot_copyright */
+    a {
+        color: #eee; /* Couleur du texte des liens */
+        opacity: 0.8; /* Opacité des liens */
+
+        /* Styles au survol des liens */
+        &:hover {
+            opacity: 1; /* Opacité maximale au survol */
+        }
+    }
+}
+.foot_copyright p {
+    text-align: center;
+}
+
+/* Styles pour l'élément .foot_social */
+.foot_social {
+    @include flexbox(); /* Affichage en boîte flexible */
+    gap: 2rem; /* Espacement entre les éléments */
+    font-size: 1.2rem; /* Taille de police */
+    margin-right: 4rem; /* Marge à droite */
+}
