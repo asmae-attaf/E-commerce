@@ -1,17 +1,27 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BsFillStarFill, BsArrowRight } from 'react-icons/bs';
+import { BsFillStarFill } from 'react-icons/bs';
 import { FavoritesContext } from '../favoris/favoritesContext';
 import WishlistItem from '../components/cart/WishlistItem';
 import EmptyView from '../components/common/EmptyView';
 
 const Wishlist = () => {
     const { favoriteItems, getFavoriteItems } = useContext(FavoritesContext);
-    const favoritesQuantity = favoriteItems.length;
+    const [favoritesQuantity, setFavoritesQuantity] = useState(0);
 
     useEffect(() => {
-        getFavoriteItems();
-    }, [getFavoriteItems]);
+        const fetchData = async () => {
+            try {
+                await getFavoriteItems();
+                // Mettez à jour la quantité de favoris après la récupération
+                setFavoritesQuantity(favoriteItems.length);
+            } catch (error) {
+                console.error('Error fetching favorite items:', error);
+            }
+        };
+
+        fetchData();
+    }, [getFavoriteItems, favoriteItems]);
 
     return (
         <>
@@ -26,13 +36,11 @@ const Wishlist = () => {
                         />
                     ) : (
                         <div className="container">
-                        <div className="wrapper products_wrapper ">
-                            
+                            <div className="wrapper products_wrapper">
                                 {favoriteItems.map(item => (
                                     <WishlistItem key={item.id} {...item} />
                                 ))}
-                            
-                          </div>  
+                            </div>
                         </div>
                     )}
                 </div>

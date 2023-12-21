@@ -7,6 +7,7 @@ import commonContext from '../../contexts/common/commonContext';
 import useOutsideClose from '../../hooks/useOutsideClose';
 import useScrollDisable from '../../hooks/useScrollDisable';
 import AuthService from './ServicesConnexionInscription/auth.service';
+import { useFavorites } from '../../favoris/favoritesContext';  // Importez le hook useFavorites
 
 const required = (value) => {
   if (!value) {
@@ -20,6 +21,9 @@ const required = (value) => {
 
 const Login = () => {
   const { setLoggedIn } = useContext(commonContext);
+  const { getFavoriteItems } = useFavorites();  // Ajoutez cette ligne pour obtenir la fonction getFavoriteItems
+  const currentUser = AuthService.getCurrentUser();
+  const userId = currentUser ? currentUser.id : null;
 
   const [user, setUser] = useState({
     nom: '',
@@ -112,8 +116,13 @@ const Login = () => {
           history('/');
         }, 6000);
         setLoggedIn(true);
+       
+          getFavoriteItems(userId);
+          console.log('login')
+          
+      }, [userId, getFavoriteItems])
 
-      })
+    
 
       .catch((error) => {
         const resMessage =

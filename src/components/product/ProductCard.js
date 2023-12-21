@@ -5,6 +5,7 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { displayMoney } from '../../helpers/utils';
 import axios from 'axios';  // Ajout de l'import pour axios
+import AuthService from '../form/ServicesConnexionInscription/auth.service'; // replace with the actual path
 
 import cartContext from '../../contexts/cart/cartContext';
 import { FavoritesContext } from '../../favoris/favoritesContext';
@@ -39,14 +40,20 @@ const ProductCard = (props) => {
         addToFavorites(item);
         setIsHeartActive(true);
     
-        const userId = 29;
+        const currentUser = AuthService.getCurrentUser();
+    const userId = currentUser ? currentUser.id : null;
+
+    if (!userId) {
+        console.error('Erreur: Impossible de récupérer l\'ID de l\'utilisateur depuis le local storage.');
+        return;
+    }
         const produitId = item.id;
         console.log(produitId);
     
         try {
             await axios.post('http://localhost:8080/api/Favoris/add', {
-                user: userId ,
-                produit: produitId 
+                user: { id: userId },
+                produit: { id: produitId } 
             });
             console.log('Favori ajouté avec succès !');
         } catch (error) {
